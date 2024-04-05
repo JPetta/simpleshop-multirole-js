@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models'); // Assuming you have a User model defined with Sequelize
 const nodemailer = require('nodemailer');
+const passport = require('passport');
+const { Strategy: GoogleStrategy } = require('passport-google-oauth20');
 
 exports.registerUser = async (req, res) => {
   console.log(process.env.EMAIL) // Your Gmail address
@@ -110,4 +112,43 @@ exports.changeUserStatus = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: 'Server error.', code: 500 });
   }
+
+  passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.GOOGLE_CALLBACK_URL
+  }, async (accessToken, refreshToken, profile, done) => {
+    try {
+      // Check if the user already exists
+      let user = await User.findOne({ where: { googleId: profile.id } });
+  
+      // If user doesn't exist, create a new one
+      if (!user) {
+        user = await User.create({
+          email: profile.emails[0].value,
+          name: profile.displayName,
+          googleId: profile.id,
+          role: 'user',
+          active: true // You may adjust this based on your application's logic
+        });
+      }
+  
+      // Generate JWT token
+      const token = jwt.sign({ email: user.email, role: user.role }, process.env.SECRET, { expiresIn: '1h' });
+  
+      // Pass the user and token to the done callback
+      return done(null, { user, token });
+    } catch (error) {
+      return done(error);
+    }
+  }));
+  
+  // Middleware to initiate Google OAuth2 authentication
+  exports.googleAuth = passport.authenticate('google', { scope: ['profile', 'email'] });
+  
+  // Callback route for handling Google OAuth2 authentication
+  exports.googleAuthCallback = passport.authenticate('google', { session: false }), (req, res) => {
+    // Redirect or respond with token as needed
+    res.status(200).json({ message: 'Login successful.', code: 200, data: req.user.token });
+  };
 };

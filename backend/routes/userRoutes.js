@@ -8,4 +8,8 @@ router.post('/login', userController.loginUser);
 router.get('/', authenticate, authorize(['admin']), userController.getAllUsers);
 router.put('/status/:id', authenticate, authorize(['admin']), userController.changeUserStatus);
 
+// Google OAuth2 routes
+router.get('/auth/google', googleAuth);
+router.get('/auth/google/callback', googleAuthCallback);
+
 module.exports = router;
