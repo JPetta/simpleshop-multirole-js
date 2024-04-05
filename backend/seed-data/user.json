@@ -1,7 +1,7 @@
 [
     {
       "name": "admin",
-      "email": "email",
+      "email": "admin@gmail.com",
       "password": "admin_password",
       "role": "admin",
       "phoneNum": "081234567890",
