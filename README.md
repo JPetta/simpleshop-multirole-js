@@ -1,1 +1,1 @@
-# simpleshop-multirole-js
+# simple-ecommerce-fullstack

@@ -1,0 +1,35 @@
+[
+    {
+      "id": 1,
+      "plu": "PDCT0000001",
+      "name": "Cheetos",
+      "description": "Cheetos snack",
+      "active": true,
+      "created_user": "admin",
+      "created_date": "2023-02-01 07:00:00",
+      "updated_user": "admin",
+      "updated_date": "2023-02-01 07:00:00"
+    },
+    {
+      "id": 2,
+      "plu": "PDCT0000002",
+      "name": "Indomie",
+      "description": "Instant noodle",
+      "active": true,
+      "created_user": "admin",
+      "created_date": "2023-02-01 07:00:00",
+      "updated_user": "admin",
+      "updated_date": "2023-02-01 07:00:00"
+    },
+    {
+      "id": 3,
+      "plu": "PDCT0000003",
+      "name": "Air Mineral Aqua",
+      "description": "Bottled mineral water",
+      "active": true,
+      "created_user": "admin",
+      "created_date": "2023-02-01 07:00:00",
+      "updated_user": "admin",
+      "updated_date": "2023-02-01 07:00:00"
+    }
+  ]
