@@ -1,7 +1,7 @@
 [
     {
       "name": "admin",
-      "email": "admin@gmail.com",
+      "email": "admin@mail.com",
       "password": "admin_password",
       "role": "admin",
       "phoneNum": "081234567890",
@@ -9,7 +9,7 @@
     },
     {
       "name": "user",
-      "email": "email",
+      "email": "user@mail.com",
       "password": "user_password",
       "role": "user",
       "phoneNum": "089876543210",
