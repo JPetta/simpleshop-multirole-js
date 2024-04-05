@@ -1,0 +1,1 @@
+# simpleshop-multirole-js
